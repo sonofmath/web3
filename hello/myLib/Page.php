@@ -23,7 +23,7 @@ class Page extends Generator {
 
     public function head() {
         echo "<head>\n";
-        echo "<meta charset="UTF-8">\n";
+        echo "<meta charset=\"UTF-8\">\n";
         $this->title();
         echo "</head>\n";
     }
