@@ -39,7 +39,8 @@ class Page extends Generator {
     }
 
     public function content() {
-        echo "<b>Hello World</b>\nSweet my php framework is working!\n";
+        echo "<b>Hello World</b>
+        Sweet my php framework is working!";
     }
 
     public function generate() {
