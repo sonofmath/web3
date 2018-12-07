@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          
+
           <header class="modal-header">
             <slot name="header">
               <h3>Update Message</h3>
@@ -13,7 +13,7 @@
           <slot name="modal-body">
             <slot name="body">
               <input type="text"/>
-              <button type="button" class="btn btn-secondary" @click="close">
+              <button type="button" class="btn btn-primary" @click="close">
                   <h3><b>Update</b></h3>
               </button>
             </slot>
@@ -21,7 +21,7 @@
 
           <slot name="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit('close')">
+              <button class="btn btn-primary" @click="$emit('close')">
                 Cancel
               </button>
             </slot>
@@ -34,15 +34,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'modal',
+export default {
+  name: 'modal',
 
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
-  };
+  methods: {
+    close () {
+      this.$emit('close')
+    }
+  }
+}
 </script>
 
 <style>
@@ -52,7 +52,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 251, 251);
     display: flex;
     justify-content: center;
     align-items: center;

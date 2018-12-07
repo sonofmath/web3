@@ -53,7 +53,6 @@
                 <table class="table table-striped alert-secondary">
                   <thead>
                     <tr>
-                      <th><b>Plant ID</b></th>
                       <th><b>Type</b></th>
                       <th><b>Message</b></th>
                       <th colspan="1"><b>Plant</b></th>
@@ -61,10 +60,9 @@
                   </thead>
                   <tbody>
                     <tr v-for="rack of racks" v-if="rack.drying === true" :key="rack['.key']">
-                      <td>{{ rack.id }}</td>
                       <td>{{ rack.type }}</td>
                       <td>{{ rack.message }}</td>
-                      <input type="button" class="btn btn-warning" value="Remove Plant" @click="removePlant(rack)">
+                      <button class="btn btn-warning"@click="removePlant(rack)">Remove Plant</button>
                       <td>
                           <router-link>
                           </router-link>
@@ -89,7 +87,6 @@
                 <table class="table table-striped alert-secondary">
                   <thead>
                     <tr>
-                      <th><b>Rack ID</b></th>
                       <th><b>Type</b></th>
                       <th><b>Message</b></th>
                       <th><b>Total Drying Time</b></th>
@@ -98,7 +95,6 @@
                   </thead>
                   <tbody>
                     <tr v-for="(rack, index) in racks" v-if="rack.drying !==true" :key="index">
-                      <td>{{ rack.id }}</td>
                       <td>{{ rack.type }}</td>
                       <td>{{ rack.message }}</td>
                       <td>{{ rack.totalTime | formatDate }}</td>
