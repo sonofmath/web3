@@ -12,9 +12,9 @@
 
           <slot name="modal-body">
             <slot name="body">
-              <input type="text"/>
+              <h3><input type="text"/></h3>
               <button type="button" class="btn btn-primary" @click="close">
-                  <h3><b>Update</b></h3>
+                  <b>Update</b>
               </button>
             </slot>
           </slot>

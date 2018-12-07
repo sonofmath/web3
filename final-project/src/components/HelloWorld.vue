@@ -62,7 +62,7 @@
                     <tr v-for="rack of racks" v-if="rack.drying === true" :key="rack['.key']">
                       <td>{{ rack.type }}</td>
                       <td>{{ rack.message }}</td>
-                      <button class="btn btn-warning"@click="removePlant(rack)">Remove Plant</button>
+                      <button class="btn btn-warning" @click="removePlant(rack)">Remove Plant</button>
                       <td>
                           <router-link>
                           </router-link>
@@ -119,7 +119,6 @@
 <script>
 import firebase from 'firebase'
 import { db } from '../firebaseApp'
-import moment from 'moment'
 import modal from './modal'
 import modal2 from './modalConfirm'
 
@@ -128,8 +127,8 @@ let postsRef = db.ref('racks')
 export default {
   name: 'HelloWorld',
   components: {
-      modal,
-      modal2
+    modal,
+    modal2
   },
   data () {
     return {
@@ -152,7 +151,7 @@ export default {
         const diff = {}
 
         diff.days = Math.floor(value / 86400)
-        diff.hours   = Math.floor(value / 3600 % 24)
+        diff.hours = Math.floor(value / 3600 % 24)
         diff.minutes = Math.floor(value / 60 % 60)
         diff.seconds = Math.floor(value % 60)
 
@@ -197,19 +196,19 @@ export default {
       alert('Successfully Deleted')
     },
 
-    showModal() {
+    showModal () {
       this.isModalVisible = true
     },
 
-    closeModal() {
+    closeModal () {
       this.isModalVisible = false
     },
 
-    showModal2() {
+    showModal2 () {
       this.isModal2Visible = true
     },
 
-    closeModal2() {
+    closeModal2 () {
       this.isModal2Visible = false
     }
   },

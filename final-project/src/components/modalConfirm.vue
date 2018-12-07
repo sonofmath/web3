@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          
+
           <header class="modal-header">
             <slot name="header">
               <h3>Confirm Delete</h3>
@@ -34,22 +34,21 @@
 </template>
 
 <script>
-import { db } from '../firebaseApp'
+// import { db } from '../firebaseApp'
 
-  export default {
-    name: 'modal',
+export default {
+  name: 'modal',
 
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-
-      deleteLogs (rack) {
-      postsRef.child(rack['.key']).remove()
-      alert('Successfully Deleted')
+  methods: {
+    close () {
+      this.$emit('close')
     }
-    },
-  };
+    // deleteLogs (rack) {
+    // postsRef.child(rack['.key']).remove()
+    // alert('Successfully Deleted')
+  // }
+  }
+}
 </script>
 
 <style>

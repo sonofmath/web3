@@ -3,11 +3,13 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './Login'
 import SignUp from './SignUp'
+import Reset from './ResetPassword'
 import firebase from 'firebase'
 
 Vue.use(Router)
 
 let router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -17,6 +19,11 @@ let router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/resetpassword',
+      name: 'ResetPassword',
+      component: Reset
     },
     {
       path: '/signup',

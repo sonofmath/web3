@@ -11,7 +11,7 @@
       <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1>Create A New Account</h1>
+                <h1>Reset Password</h1>
             </div>
             <div class="card-body alert-success">
               <div>
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   name: 'signup',
   data () {

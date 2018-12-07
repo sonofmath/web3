@@ -49,7 +49,7 @@
 <script>
 import firebase from 'firebase'
 export default {
-  name: 'login',
+  name: 'loginpg',
   data: function () {
     return {
       email: '',
@@ -65,29 +65,14 @@ export default {
       firebase.auth().signInWithRedirect(provider).then((result) => {
         this.user = result.user
       }).catch(err => console.log(error))
-    }
-  },
+    },
     computed: {
     error () {
       return this.$store.state.error
     },
     loading () {
       return this.$store.state.loading
-    },
-    watch: {
-      error (value) {
-        if (value) {
-          this.alert = true
-        }
-      }
-    },
-    alert (value) {
-      if (!value) {
-        this.$store.commit('setError', null)
-      }
     }
-  
-  
   }
 }
 </script>
