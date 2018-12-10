@@ -4,6 +4,7 @@
       <form class="form-inline">
         <button class="btn btn-outline-success" type="button"><router-link to="/">Home</router-link></button>
         <button class="btn btn-outline-secondary" type="button"><router-link to="/about">Temperature & Humidity Logs</router-link></button>
+        <button class="btn btn-outline-warning" type="button"><router-link to="/userinfo">User Info</router-link></button>
         <router-view/>
         <div>
           <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="logout">Logout</button>
@@ -95,12 +96,11 @@
                   </thead>
                   <tbody>
                     <tr v-for="(rack, index) in racks" v-if="rack.drying !==true" :key="index">
-                      <td>{{ rack.id }}</td>
                       <td>{{ rack.type }}</td>
                       <td>{{ rack.message }}</td>
-                      <td>{{ rack.totalTime | formatDate }}</td>
-                      <modal v-show="isModalVisible" @close="closeModal"/>
-                      <input type="button" class="btn btn-warning" value="Update Message" @click="showModal(rack.id)">
+                      <td>{{ rack.totalTime }}</td>
+                      <modal v-show="isModalVisible" @close="closeModal" @click.stop/>
+                      <input type="button" class="btn btn-warning" value="Update Message" @click="showModal(rack.id)"><router-link to="/components/Edit"></router-link>
                       <!-- <modal v-show="isModalVisible" @close="closeModal"/> -->
                       <input type="button" class="btn btn-danger" value="Delete Log" @click="deleteLogs(rack)">
                       <!-- <modal v-show="isModal2Visible" @close="closeModal2"/> -->
@@ -121,6 +121,7 @@
 <script>
 import firebase from 'firebase'
 import { db } from '../firebaseApp'
+import moment from 'moment'
 import modal from './modal'
 import modal2 from './modalConfirm'
 
@@ -145,23 +146,6 @@ export default {
       },
       isModalVisible: false,
       isModal2Visible: false
-    }
-  },
-  filters: {
-    formatDate (value) {
-      if (value) {
-        const diff = {}
-
-        diff.days = Math.floor(value / 86400)
-        diff.hours = Math.floor(value / 3600 % 24)
-        diff.minutes = Math.floor(value / 60 % 60)
-        diff.seconds = Math.floor(value % 60)
-
-        let message = `${diff.days}d: ${diff.hours}h: ${diff.minutes}m: ${diff.seconds}s`
-        message = message.replace(/(?:0. )+/, '')
-
-        return message
-      }
     }
   },
   methods: {
@@ -193,10 +177,33 @@ export default {
     removePlant (plant) {
       var ts = Date.now()
       var tot = ts - plant.inTime
-      postsRef.child(plant['.key']).update({ drying: false, outTime: ts, totalTime: tot })
+      var cd = 24 * 60 * 60 * 1000,
+        ch = 60 * 60 * 1000,
+        d = Math.floor(tot / cd),
+        h = Math.floor( (tot - d * cd) / ch),
+        m = Math.round( (tot - d * cd - h * ch) / 60000),
+        minutesms = tot % (60*1000),
+        s = Math.round( (minutesms) / 1000),
+        pad = function(n){ return n < 10 ? '0' + n : n; }
+        if( s === 60 ){
+          m++
+          s = 0
+        }
+        if( m === 60 ){
+          h++
+          m = 0
+        }
+        if( h === 24 ){
+          d++
+          h = 0
+        }
+        let tottime = "Days: " + d + " H: " + h + " M: " + m + " S: " + s
+
+      postsRef.child(plant['.key']).update({ drying: false, outTime: ts, totalTime: tottime })
     },
 
-    updateMessage (message) {
+    updateMessage (rack) {
+
     },
 
     deleteLogs (rack) {
@@ -212,10 +219,6 @@ export default {
 
     closeModal () {
       this.isModalVisible = false
-    },
-
-    updateModal () {
-
     },
 
     showModal2 () {

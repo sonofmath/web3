@@ -1,16 +1,17 @@
 <template>
-  <modal name="modal" @before-open="beforeOpen">
+  <modal name="modal" id="mymodal" ref="modal" class="modal" @before-open="beforeOpen">
     <div>
       <h3>Update Message</h3>
       <p>{{ itemToShow }}</p>
       <input id="input" type="text" class="form-control" v-model="newmessage"/>
-      <button type="button" class="btn btn-primary" @click="update, $emit('close')"><b>Update</b></button>
+      <button type="button" class="btn btn-primary" @click="update"><b>Update</b></button>
       <button class="btn btn-primary" @click="$emit('close')">Cancel</button>
     </div>
   </modal>
 </template>
 
 <script>
+import firebase from 'firebase'
 import { db } from '../firebaseApp'
 let postsRef = db.ref('racks')
 
@@ -28,7 +29,14 @@ export default {
       return this.item
     }
   },
+  mounted() {
+    $(document).ready(function() {
+      $('#mymodal').on('hidden', function() {
+        clear()
+      })
+    })
 
+  },
   methods: {
     beforeOpen (event) {
       this.item = event.params.item;
@@ -37,9 +45,8 @@ export default {
       this.$emit('close')
     },
     update () {
-      alert("Id: " + this.item + " - Message: " + this.newmessage)
       postsRef.child(this.item).update({ message : this.newmessage })
-      this.newmessage = ''
+      this.close()
     }
   }
 }

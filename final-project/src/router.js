@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Login from './Login'
+import UserInfo from './UserInfo'
 import SignUp from './SignUp'
 import Reset from './ResetPassword'
-// import Edit from './components/Edit'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -13,6 +13,10 @@ Vue.use(Router)
 let router = new Router({
   mode: 'history',
   routes: [
+    {
+      path: '*',
+      redirect: '/login'
+    },
     {
       path: '/',
       redirect: '/login'
@@ -44,6 +48,14 @@ let router = new Router({
       path: '/about',
       name: 'about',
       component: About,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/userinfo',
+      name: 'userinfo',
+      component: UserInfo,
       meta: {
         requiresAuth: true
       }

@@ -31,14 +31,16 @@ export const store = new Vuex.Store({
           var user = firebase.auth().currentUser;
 
           user.sendEmailVerification().then(function() {
+            if(user.emailVerified) {
+              commit('setUser', {email: firebaseUser.user.email})
+              commit('setLoading', false)
+              router.push('/home')
+              commit('setError', null)
+            }
             // Email sent.
           }).catch(function(error) {
             // An error happened.
           });
-          commit('setUser', {email: firebaseUser.user.email})
-          commit('setLoading', false)
-          router.push('/home')
-          commit('setError', null)
         })
         .catch(error => {
           commit('setError', error.message)
@@ -55,6 +57,7 @@ export const store = new Vuex.Store({
           router.push('/home')
         })
         .catch(error => {
+          alert("Wrong Email or Incorrect Password")
           commit('setError', error.message)
           commit('setLoading', false)
         })
