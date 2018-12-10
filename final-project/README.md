@@ -1,6 +1,4 @@
-# final-project
-
-## Data Logger for Small Farm
+# Data Logger for Small Farm
 
 ### Link To Graph Web Page Repo
 
