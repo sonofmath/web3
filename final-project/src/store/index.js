@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase'
-//import router from '@/router'
+import router from '@/router'
 
 Vue.use(Vuex)
 
@@ -28,6 +28,13 @@ export const store = new Vuex.Store({
         commit('setLoading', true)
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(firebaseUser => {
+          var user = firebase.auth().currentUser;
+
+          user.sendEmailVerification().then(function() {
+            // Email sent.
+          }).catch(function(error) {
+            // An error happened.
+          });
           commit('setUser', {email: firebaseUser.user.email})
           commit('setLoading', false)
           router.push('/home')

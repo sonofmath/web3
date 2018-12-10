@@ -55,7 +55,7 @@
                     <tr>
                       <th><b>Type</b></th>
                       <th><b>Message</b></th>
-                      <th colspan="1"><b>Plant</b></th>
+                      <th colspan="1"><b>Remove</b></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -95,13 +95,15 @@
                   </thead>
                   <tbody>
                     <tr v-for="(rack, index) in racks" v-if="rack.drying !==true" :key="index">
+                      <td>{{ rack.id }}</td>
                       <td>{{ rack.type }}</td>
                       <td>{{ rack.message }}</td>
                       <td>{{ rack.totalTime | formatDate }}</td>
-                      <input type="button" class="btn btn-warning" value="Update Message" @click="showModal">
                       <modal v-show="isModalVisible" @close="closeModal"/>
-                      <input type="button" class="btn btn-danger" value="Delete Log" @click="showModal2">
-                      <modal v-show="isModal2Visible" @close="closeModal2"/>
+                      <input type="button" class="btn btn-warning" value="Update Message" @click="showModal(rack.id)">
+                      <!-- <modal v-show="isModalVisible" @close="closeModal"/> -->
+                      <input type="button" class="btn btn-danger" value="Delete Log" @click="deleteLogs(rack)">
+                      <!-- <modal v-show="isModal2Visible" @close="closeModal2"/> -->
                       <td>
                           <router-link>
                           </router-link>
@@ -127,7 +129,7 @@ let postsRef = db.ref('racks')
 export default {
   name: 'HelloWorld',
   components: {
-    modal,
+    modal: modal,
     modal2
   },
   data () {
@@ -166,11 +168,17 @@ export default {
     addRack () {
       var ts = Date.now()
       this.$firebaseRefs.racks.push({
-        id: ts,
         type: this.addRack.type,
         message: this.addRack.message,
         inTime: ts,
         drying: true
+      })
+      postsRef.on("child_added", function(snapshot) {
+        // This will only be called for the last 100 messages
+        var newID = snapshot.key
+        postsRef.child(newID).update({
+          id: newID,
+        })
       })
       this.addRack.type = ''
       this.addRack.message = ''
@@ -196,12 +204,18 @@ export default {
       alert('Successfully Deleted')
     },
 
-    showModal () {
+    showModal (id) {
       this.isModalVisible = true
+      this.rack = id
+      this.$modal.show('modal', {item: id})
     },
 
     closeModal () {
       this.isModalVisible = false
+    },
+
+    updateModal () {
+
     },
 
     showModal2 () {

@@ -16,8 +16,11 @@
                 <div>
                     <h3>Email:
                     <input
-                        type="text"
+                        name="email"
+                        label="email"
                         v-model="email"
+                        id="email"
+                        type="email"
                         placeholder=" Email Address"
                         class="input alert-light"
                         required>
@@ -30,11 +33,14 @@
                         class="input alert-light"
                         required>
                     <br/>
-                    <button v-on:click="login" class="btn btn-primary">Enter</button>
+                    <button v-on:click="login" class="btn btn-lg btn-primary">Enter</button>
                     <br/>
                     </h3>
 
-                    <button @click="signInWithGoogle">Sign in with Google</button>
+                    <!-- <h4><button class="btn btn btn-outline-primary" @click="signInWithGoogle">Sign in with Google</button></h4>
+                    <br/> -->
+                    <button class="btn btn-sm btn-info"><router-link to="/resetpassword">Forgot Password</router-link></button>
+                    <br/>
                     <p><router-link to="/signup">
                     <h4>New Here? Create a new account</h4>
                     </router-link></p>

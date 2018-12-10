@@ -15,7 +15,7 @@
             </div>
             <div class="card-body alert-success">
               <div>
-                <h3>Email:
+                <h3>Enter Email:
                 <input
                   name="email"
                   label="email"
@@ -26,31 +26,8 @@
                   placeholder=" Email Address"
                   required>
                 <br><br>
-                Password:
-                <input
-                  v-model="password"
-                  name="password"
-                  label="Password"
-                  id="password"
-                  type="password"
-                  class="input alert-light"
-                  placeholder=" Password"
-                  required>
-                <br><br/>
-                Confirm Password:
-                <input
-                  v-model="confirmPassword"
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  id="confirmPassword"
-                  type="password"
-                  class="input alert-light"
-                  placeholder=" Password"
-                  :rules="[comparePasswords]"
-                  required>
-                <br>
                 </h3>
-                <button v-on:click="signUp" class="btn btn-primary">Sign Up!</button>
+                <button id="btn" v-on:click="reset" class="btn btn-primary">Reset</button>
                 <button class="button">
                   <router-link to="/login">
                     <h4>Back</h4>
@@ -72,27 +49,21 @@ export default {
     return {
       email: '',
       password: '',
-      passwordConfirm: '',
       alert: false
     }
   },
-  computed: {
-    comparePasswords () {
-      return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
-    },
-    error () {
-      return this.$store.state.error
-    },
-    loading () {
-      return this.$store.state.loading
-    }
-  },
   methods: {
-    signUp () {
-      if (this.comparePasswords !== true) {
-        return
-      }
-      this.$store.dispatch('userSignUp', { email: this.email, password: this.password })
+    reset () {
+      var auth = firebase.auth()
+      var emailAddress = this.email
+
+      auth.sendPasswordResetEmail(emailAddress).then(function() {
+        // Email sent.
+        document.getElementById('btn').disabled = "disabled"
+        alert("Email has been sent to " + emailAddress)
+      }).catch(function(error) {
+        // An error happened.
+      })
     }
   },
   watch: {

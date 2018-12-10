@@ -39,10 +39,10 @@
                 <br><br/>
                 Confirm Password:
                 <input
-                  v-model="confirmPassword"
-                  name="confirmPassword"
+                  v-model="passwordConfirm"
+                  name="passwordConfirm"
                   label="Confirm Password"
-                  id="confirmPassword"
+                  id="passwordConfirm"
                   type="password"
                   class="input alert-light"
                   placeholder=" Password"
@@ -50,8 +50,8 @@
                   required>
                 <br>
                 </h3>
-                <button v-on:click="signUp" class="btn btn-primary">Sign Up!</button>
-                <button class="button">
+                <button id="signup" v-on:click="signUp" class="btn btn-primary">Sign Up!</button>
+                <button it="back" class="button">
                   <router-link to="/login">
                     <h4>Back</h4>
                   </router-link>
@@ -89,8 +89,11 @@ export default {
   methods: {
     signUp () {
       if (this.comparePasswords !== true) {
+        alert("Passwords do not match")
         return
       }
+      alert("Account successfully created! Verification email has been sent to " + this.email)
+      document.getElementById("signup").disabled = "disabled"
       this.$store.dispatch('userSignUp', { email: this.email, password: this.password })
     }
   },

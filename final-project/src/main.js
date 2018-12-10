@@ -11,9 +11,11 @@ import App from './App.vue'
 import router from './router'
 import './firebaseApp'
 import { store } from './store'
+import VModal from 'vue-js-modal'
 
 Vue.use(VueFire)
 Vue.use(Vuetify)
+Vue.use(VModal)
 
 Vue.config.productionTip = false
 
