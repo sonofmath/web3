@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-light bg-light">
       <form class="form-inline">
-        <button class="btn btn-outline-success" type="button"><router-link to="/">Home</router-link></button>
+        <button class="btn btn-outline-success" type="button"><router-link to="/logs">Home</router-link></button>
         <button class="btn btn-outline-secondary" type="button"><router-link to="/about">Temperature & Humidity Logs</router-link></button>
         <button class="btn btn-outline-warning" type="button"><router-link to="/userinfo">User Info</router-link></button>
         <router-view/>
@@ -170,7 +170,7 @@ export default {
 
     logout () {
       firebase.auth().signOut().then(() => {
-        this.$router.replace('login')
+        this.$router.replace('/')
       })
     },
 

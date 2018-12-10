@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Login from './Login'
+import HelloWorld from './components/HelloWorld.vue'
 import UserInfo from './UserInfo'
 import SignUp from './SignUp'
 import Reset from './ResetPassword'
@@ -38,8 +39,13 @@ let router = new Router({
     },
     {
       path: '/home',
-      name: 'home',
+      name: 'Hello',
       component: Home,
+    },
+    {
+      path: '/logs',
+      name: 'HelloWorld',
+      component: HelloWorld,
       meta: {
         requiresAuth: true
       }
@@ -68,7 +74,7 @@ router.beforeEach((to, from, next) => {
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) next('login')
-  else if (!requiresAuth && currentUser) next('home')
+  else if (!requiresAuth && currentUser) next('/')
   else next()
 })
 

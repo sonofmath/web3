@@ -34,7 +34,7 @@ export const store = new Vuex.Store({
             if(user.emailVerified) {
               commit('setUser', {email: firebaseUser.user.email})
               commit('setLoading', false)
-              router.push('/home')
+              router.push('/login')
               commit('setError', null)
             }
             // Email sent.
@@ -54,7 +54,7 @@ export const store = new Vuex.Store({
           commit('setUser', {email: firebaseUser.user.email})
           commit('setLoading', false)
           commit('setError', null)
-          router.push('/home')
+          router.push('/logs')
         })
         .catch(error => {
           alert("Wrong Email or Incorrect Password")

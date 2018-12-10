@@ -3,9 +3,11 @@
     <div class="login">
       <nav class="navbar navbar-light bg-light">
       <form class="form-inline">
-        <button class="btn btn-outline-success" type="button"><router-link to="/">Home</router-link></button>
-        <button class="btn btn-outline-secondary" type="button"><router-link to="/about">Temperature & Humidity Logs</router-link></button>
+        <button class="btn btn-outline-success" type="button"><router-link to="/logs">Home</router-link></button>
         <router-view/>
+        <div>
+          <button class="btn btn-outline-success my-2 my-sm-0" v-on:click="logout">Logout</button>
+        </div>
       </form>
       </nav>
       <div class="container">
@@ -27,7 +29,7 @@
                   required>
                 <br><br>
                 <button id="btn" v-on:click="update" class="btn btn-primary">Update Email</button>
-                <button id="reset" class="btn btn-sm btn-info" v-on:click="resetpassword">Change Password</button>
+                <button id="reset" class="btn btn-info" v-on:click="resetpassword">Change Password</button>
                 <br>
                 <button id="delete" class="btn btn-sm btn-danger" v-on:click="deleteAcct">Delete Account</button>
                 </h3>
@@ -88,6 +90,11 @@ export default {
         // User deleted.
       }).catch(function(error) {
         // An error happened.
+      })
+    },
+    logout () {
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login')
       })
     }
   },
