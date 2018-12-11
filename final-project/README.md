@@ -4,7 +4,7 @@ https://github.com/sonofmath/vue_firebase/tree/master/mdbvuefire
 
 ## Login Page
 
-<img src="JavaFinalPics/LogIn.PNG">
+<img src="Web3ProjectPics/LogIn.PNG">
 
 ## Home Page
 ```
