@@ -11,17 +11,17 @@ https://github.com/sonofmath/vue_firebase/tree/master/mdbvuefire
 On the Home page there is full CRUD-ability with the plants and the drying logs
 ```
 
-<img src="JavaFinalPics/Home.PNG">
-<img src="JavaFinalPics/Home2.PNG">
-<img src="JavaFinalPics/UpdateMessage.PNG">
+<img src="Web3ProjectPics/Home.PNG">
+<img src="Web3ProjectPics/Home2.PNG">
+<img src="Web3ProjectPics/UpdateMessage.PNG">
 
 
 ## Temp and Humidity Data and Graph
 
-<img src="JavaFinalPics/TempData.PNG">
+<img src="Web3ProjectPics/TempData.PNG">
 
 ## User CRUD Stuff
 
-<img src="JavaFinalPics/CreateAccount.PNG">
-<img src="JavaFinalPics/ResetPassword.PNG">
-<img src="JavaFinalPics/UpdateUserInfo.PNG">
+<img src="Web3ProjectPics/CreateAccount.PNG">
+<img src="Web3ProjectPics/ResetPassword.PNG">
+<img src="Web3ProjectPics/UpdateUserInfo.PNG">
